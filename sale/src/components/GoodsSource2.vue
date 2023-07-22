@@ -25,6 +25,10 @@
         <span class="price" v-if="item.price"><i style="font-size:5px">￥</i>{{ item.price }}</span>
         <span class="initiator">{{ item.ownName }} | {{ item.createTime | formatTimer}}</span>
       </div>
+      <div class="pic-title" >
+        <img  v-if="item.type == 'goods'"  src="../assets/img/gong.jpg" alt="">
+        <img   v-else src="../assets/img/xu.jpg" alt="">
+      </div> 
     </div>
   </div>
 </template>
@@ -153,5 +157,23 @@ export default {
 .search /deep/ .el-input--suffix .el-input__inner{
   height: 35px;
   line-height: 35px;
+}
+
+.pic-title {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pic-title img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.goods:hover{
+  box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+  cursor: pointer;
 }
 </style>

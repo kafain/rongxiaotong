@@ -17,6 +17,10 @@
         <span @click="Login" class="login">登录</span> |
         <span @click="Register" class="register">注册</span>
       </div>
+      <div id="weather-box">
+      <iframe style="width: 100%; height: 100%;" scrolling="no" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=1&icon=1&num=5"></iframe>
+      </div>
+
     </span>
 
     <div class="menu-content" v-cloak>
@@ -228,4 +232,11 @@ export default {
 [v-cloak] {
   display: none;
 }
+#weather-box {
+    float: left;
+    margin-top: 20px; /* 根据需要调整下移的距离 */
+    width: 300px;
+    height: 60px;
+  }
+
 </style>

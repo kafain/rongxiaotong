@@ -14,16 +14,15 @@
         <a class="tag-item" @click="handleTopicDetail('赣南脐橙')">赣南脐橙</a> 
       </i>
     </div>
-    <div class="goods" v-for="(item, index) in cgoods"
-      :key="index" @click="detailsClick(item.orderId)" :style="(index+1)%5===0?'margin-right:0':'margin-right:25px;'">
-      <img class="goods-img" v-if="item.picture!==''" :src="$store.state.imgShowRoad + '/file/' + item.picture" alt="" />
-      <img class="goods-img" v-if="item.picture===''" :src="$store.state.imgShowRoad + '/file/' + 'wutu.gif'" alt="" />
-      <div class="info">
-        <span class="initiator">[{{ item.ownName }}]</span>
-        <p class="content">{{ item.content }}</p>
-        <span class="price" v-if="item.price">￥{{ item.price }}</span>
-      </div>
-    </div>
+    <div class="goods" v-for="(item, index) in cgoods" :key="index" @click="detailsClick(item.orderId)" :style="(index+1)%5===0?'margin-right:0':'margin-right:25px;'">
+  <img class="goods-img" v-if="item.picture!=''" :src="$store.state.imgShowRoad + '/file/' + item.picture" alt="" />
+  <img class="goods-img" v-if="item.picture==''" :src="$store.state.imgShowRoad + '/file/' + 'wutu.gif'" alt="" />  
+  <div class="info">
+    <span class="initiator">[{{ item.ownName }}]</span>
+    <p class="content">{{ item.content }}</p>
+    <span class="price" v-if="item.price">￥{{ item.price }}</span>
+  </div>
+</div>
   </div>
 </template>
 
@@ -138,4 +137,22 @@ export default {
   height: 35px;
   line-height: 35px;
 }
+
+.goods {
+    position: relative;
+  }
+
+  .goods:hover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 165, 0, 0.2); /* 设置淡橙色覆盖的颜色和透明度 */
+    z-index: 1; /* 确保覆盖在内容上方 */
+    pointer-events: none; /* 防止覆盖层影响鼠标事件的触发 */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* 添加阴影效果 */
+  }
+
 </style>

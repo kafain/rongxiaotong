@@ -2,11 +2,13 @@
   <div class="home-content">
     <navigation-bar></navigation-bar>
     <router-view></router-view>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import NavigationBar from "../components/NavigationBar.vue";
+import Footer from "../components/Footer.vue";
 export default {
   name: "Home",
   data() {
@@ -14,6 +16,7 @@ export default {
   },
   components: {
     NavigationBar,
+    Footer,
   },
 };
 </script>

@@ -1,31 +1,43 @@
 <template>
-<div class="front-page-container">
-  <div class="front-page">
-    <goods-sourse2 :cgoods="goods" @handleSearch="handleSearch"></goods-sourse2>
-    <pagination @item-click="pageClick" :cUrl="url"
-      :cTotal="total" :cPageSize="pageSize"></pagination>
+<div class="big-front-page">
+  <div class="swiper-container" id="mySwiper">
+    <swiper></swiper>
   </div>
-  <div class="right-info">
-    <div class="free-btn">
-      <img src="../assets/img/fabuxinxi2.png" @click="toPublish">   
+
+  <div class="front-page-container">
+    <div class="front-page">
+      <goods-sourse2 :cgoods="goods" @handleSearch="handleSearch"></goods-sourse2>
+      <pagination @item-click="pageClick" :cUrl="url"
+        :cTotal="total" :cPageSize="pageSize"></pagination>
     </div>
-    <div class="top-info">
-      <div style="font-size:18px"><strong>近期热门信息</strong></div>
-      <div class="item-info" v-for="(item,index) in goodsTopics" :key="index" @click="handleDetail(item)">{{index+1}}、{{item.content}}</div>  
+    <div class="right-info">
+      <div class="free-btn">
+        <img src="../assets/img/fabuxinxi2.png" @click="toPublish">   
+      </div>
+      <div class="top-info">
+      <div style="font-size:25px"><strong>近期热门信息</strong></div>
+      <div class="item-info" v-for="(item, index) in goodsTopics" :key="index" :style="{ '--index': index }">
+      <div class="shorten-text" @mouseover="showFullText(index)" @mouseleave="hideFullText(index)">
+        <span v-if="!showFull[index]">{{index+1}}、{{item.content | shortenText}}</span>
+        <span v-else>{{index+1}}、{{item.content}}</span>
+      </div>
+    </div>  
+    </div>
     </div>
   </div>
 </div>
-
 </template>
 <script>
 import { selectAllPage,selectGoodsPage } from "../api/order";
 import GoodsSourse2 from "../components/GoodsSource2.vue";
 import Pagination from "../components/Pagination.vue";
+import Swiper from '../components/Swiper.vue';
 export default {
   data() {
     return {
       goods: [],
       goodsTopics:[],
+      showFull:[],//记录每个文本是否显示完整内容
       total: 0,
       pageSize: 30,
       url: "/order/All/",
@@ -91,12 +103,26 @@ export default {
     handleDetail(item){
       this.$store.commit("updateOrderId", item.orderId);
       this.$router.push(`/home/details?orderId=${item.orderId}`).catch((err) => err);
-    }
+    },
+    showFullText(index) {
+        this.$set(this.showFull, index, true);
+      },
+      hideFullText(index) {
+        this.$set(this.showFull, index, false);
+      }
+
   },
   components: {
     Pagination,
     GoodsSourse2,
+    Swiper,
   },
+  filters: {
+      shortenText(value) {
+        return value.length > 15 ? value.slice(0, 15) + '...' : value;
+      }
+    },
+
 };
 </script>
 
@@ -135,4 +161,26 @@ export default {
     margin-top: 20px;
   }
 }
+.item-info {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: unset; /* 取消文本行数限制 */
+    margin-top: 10px; /* 设置顶部间距 */
+  }
+
+  .shorten-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .shorten-text:hover {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    -webkit-line-clamp: unset;
+  }
+
 </style>
