@@ -32,12 +32,53 @@ export function addOrder(params) {
         },
     })
 }
+//查询所有订单的地址
+export function getOrderAddress(params) {
+    return request({
+        method: 'get',
+        url: 'order/address',
+        headers: {
+            'Authorization': window.localStorage.token,
+        },
+    })
+}
+//查询所有商品订单的id
+export function getGoodsOrderId(params) {
+    return request({
+        method: 'get',
+        url: 'order/goods/id',
+        headers: {
+            'Authorization': window.localStorage.token,
+        },
+    })
+}
+
+//查询所有需求订单的id
+export function getNeedsOrderId(params) {
+    return request({
+        method: 'get',
+        url: 'order/needs/id',
+        headers: {
+            'Authorization': window.localStorage.token,
+        },
+    })
+}
 
 //查询所有（商品）订单的价格
 export function getGoodsOrderPrices(params) {
     return request({
         method: 'get',
         url: 'order/goods/price',
+        headers: {
+            'Authorization': window.localStorage.token,
+        },
+    })
+}
+//查询所有(需求)订单的价格
+export function getNeedsOrderPrices(params) {
+    return request({
+        method: 'get',
+        url: 'order/needs/price',
         headers: {
             'Authorization': window.localStorage.token,
         },

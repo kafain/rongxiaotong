@@ -43,7 +43,8 @@ import SmartMatch from '../views/SmartMatch'
 import FinancingDetails from '../views/FinancingDetails'
 import userGood from '../views/goodsManager.vue'
 import AboutUs from '../views/AboutUs'
-import goodsChart from "@/components/AllCharts/GoodsChart.vue";
+
+import AllCharts from "@/components/AllCharts/AllCharts.vue";
 
 Vue.use(VueRouter)
 
@@ -133,7 +134,7 @@ const routes = [
       },
       {
         path: 'allChart',
-        component: goodsChart,
+        component: AllCharts,
       },
       {
         path: 'user',

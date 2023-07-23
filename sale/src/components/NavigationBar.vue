@@ -51,8 +51,8 @@
           <el-menu-item index="8-3" @click="userManage" v-if="$store.getters.isAdmin">用户管理</el-menu-item>
           <el-menu-item index="8-4" @click.native="goodsManage" v-if="$store.getters.isAdmin">商品管理</el-menu-item>
           <el-menu-item index="8-5" @click.native="handleAbout">关于我们</el-menu-item>
-          <el-menu-item index="8-6" @click.native="logout">退出</el-menu-item>
-          <el-menu-item index="8-7" @click.native="allChart">数据报表</el-menu-item>
+          <el-menu-item index="8-6" @click.native="allChart">数据报表</el-menu-item>
+          <el-menu-item index="8-7" @click.native="logout">退出</el-menu-item>
         </el-submenu>
       </el-menu>
     </div>
