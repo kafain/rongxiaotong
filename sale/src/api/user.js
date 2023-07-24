@@ -104,3 +104,29 @@ export function updateUserPassword(params) {
     })
 }
 
+// 发送短信验证码
+export function sendVerificationCode(params) {
+    return request({
+        method: 'post',
+        url: 'user/sendMsg',
+        data: params,
+        headers: {
+            'Authorization': window.localStorage.token,
+        },
+    })
+}
+
+// 重置用户密码
+export function resetPassword(params) {
+    return request({
+        method: 'post',
+        url: 'user/resetPassword',
+        data: params,
+        headers: {
+            'Authorization': window.localStorage.token,
+        },
+    })
+}
+
+
+

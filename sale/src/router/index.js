@@ -43,14 +43,15 @@ import SmartMatch from '../views/SmartMatch'
 import FinancingDetails from '../views/FinancingDetails'
 import userGood from '../views/goodsManager.vue'
 import AboutUs from '../views/AboutUs'
-<<<<<<< Updated upstream
+
 
 import AllCharts from "@/components/AllCharts/AllCharts.vue";
-=======
+
 import goodsChart from "@/components/AllCharts/GoodsChart.vue";
 import Feedback from "../views/Feedback.vue"
 import FeedbackManage from "../views/FeedbackManage.vue"
->>>>>>> Stashed changes
+import ForgetPassword from '../views/ForgetPassword.vue';
+import SmsLogin from '../views/SmsLogin.vue'
 
 Vue.use(VueRouter)
 
@@ -270,6 +271,14 @@ const routes = [
   {
     path:'/FeedbackPage',
     component:Feedback
+  },
+  {
+    path: '/passwordforget',
+    component: ForgetPassword
+  },
+  {
+    path: '/smsLogin',
+    component: SmsLogin
   }
 ]
 

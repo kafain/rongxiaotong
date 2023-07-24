@@ -12,9 +12,6 @@
           <a class="tag-item" @click="handleTopicDetail('玉米')">玉米</a>  
           <a class="tag-item" @click="handleTopicDetail('赣南脐橙')">赣南脐橙</a> 
         </i>
-        <el-button type="success" @click="handlePublishClick" style="margin: 10px 20px"
-      >发布需求{{ cdesciibe }}</el-button>
-
     </div>
     <div class="purchase-content">
       <div v-for="(item, index) in cneeds"
@@ -71,11 +68,7 @@ export default {
     handleTopicDetail(val){
       this.searchValue = val
       this.handleSearch()
-    },
-    handlePublishClick() {  
-      this.$router.push(`/home/addmessage/publishgoods`)
     }
-
   },
 };
 </script>

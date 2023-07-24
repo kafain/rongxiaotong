@@ -22,14 +22,12 @@
 <style>
 .footer {
     margin-top:100px;
-    height: 300px;
     width: 100%;
     background: #252d38;
     color: #888b98;
 }
 .footer .main {
     padding: 0 1em;
-    height: 300px;
 }
 .container {
     max-width: 1240px;
