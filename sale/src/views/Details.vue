@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div class="details-box">
     <img v-if="data.picture" :src="$store.state.imgShowRoad + '/file/' + data.picture" alt="" />
     <img v-else src="../assets/img/wutu.gif" alt="" style="border:1px solid #f2f2f2;"/>
@@ -12,9 +13,27 @@
       </div>
       <div class="item-style">
         <div class="operation">
-          <div class="operation-item"><img src="../assets/img/good.png" class="operation-img" alt="" /> 点赞</div>
-          <div class="operation-item"><img src="../assets/img/no-star.png" class="operation-img" alt="" /> 收藏</div>
-          <div class="operation-item"><img src="../assets/img/fill-in.png" class="operation-img" alt="" />评论</div>
+          <div class="operation-item">
+            <img src="../assets/img/good.png" class="operation-img" alt="" v-if="i%2!==0" @click="changeGoodsPicture"/>
+            <img src="../assets/img/pick.png" class="operation-img" alt="" v-else @click="changeGoodsPicture"/>
+            点赞
+          </div>
+          <div class="operation-item">
+            <img src="../assets/img/no-star.png" class="operation-img" alt="" v-if="j%2!==0" @click="changeCollectPicture"/>
+            <img src="../assets/img/collect.png" class="operation-img" alt="" v-else @click="changeCollectPicture"/>
+            收藏
+          </div>
+          <div class="operation-item">
+            <img src="../assets/img/fill-in.png" class="operation-img" alt="" />
+            评论
+          </div>
+          <div class="operation-item">
+            <img @click="genEwm('ermId',data.title)" src="../assets/img/ewm.png" class="operation-img" alt="" />
+            商品二维码
+          </div>
+          <div id="ewm" style="display: none;" class="showEwm">
+            <div id="qrCode" ref="qrCodeDiv"></div>
+          </div>
         </div>
         <div class="btn-content">
           <el-button type="danger" @click="addShopcartClick" v-if="data.type == 'goods'">加入购物车</el-button>
@@ -31,6 +50,8 @@
       </div>
     </div>
   </div>
+  <CommentArea></CommentArea>
+  </div>
 </template>
 
 <script>
@@ -38,6 +59,8 @@ import { addOrderToCart } from "../api/cart";
 import { selectOrderById } from "../api/order";
 import ChangeMessage from "../components/ChangeMessage.vue";
 import { selectUserByUsername } from "../api/user";
+import CommentArea from "../components/CommentArea.vue"
+import QRCode from "qrcodejs2"
 
 export default {
   data() {
@@ -46,7 +69,10 @@ export default {
       ownerInfo: {},
       userGoods: [],
       updateGoodInfo: {},
-      updateUserData:{}
+      updateUserData:{},
+      i:1,
+      j:1,
+      isShow:false
     };
   },
   filters: {
@@ -69,7 +95,7 @@ export default {
       return y + "-" + MM + "-" + d + " ";
     }
   },
-  components: { ChangeMessage },
+  components: { ChangeMessage , CommentArea},
   props: {
     ctype: {
       type: String,
@@ -79,6 +105,32 @@ export default {
     },
   },
   methods: {
+    //控制是否显示二维码
+    genEwm(classId,value){
+      this.$nextTick(()=>{
+      let isShow = document.getElementById("ewm").style.display;
+      if(isShow == 'block'){
+      document.getElementById("ewm").style.display = 'none'
+      isShow = 'none'
+      }else{
+      document.getElementById("ewm").style.display = 'block'
+      isShow = 'block'
+      }
+      })
+    },
+    //生成二维码
+    bindQRCode: function (value) {
+      var that = this
+      setTimeout(() => {
+      var qrcode = new QRCode(that.$refs.qrCodeDiv, {
+      text: value, // 需要转换为二维码的内容
+      width: 130,
+      height: 130,
+      colorDark: '#000000',
+      colorLight: '#ffffff' 
+      })
+      }, 1000)
+    },
     addShopcartClick() {
       addOrderToCart({
         order_id: this.data.orderId,
@@ -115,7 +167,14 @@ export default {
       }).catch(err=>{
         console.log(err);
       })
+    },
+    changeGoodsPicture(){
+      this.i++
+    },
+    changeCollectPicture(){
+      this.j++
     }
+    
   },
   mounted() {
     
@@ -124,7 +183,9 @@ export default {
     }).then((res) => {
       if (res.flag == true) {
         this.data = res.data;
-
+        this.$nextTick(function () {
+          this.bindQRCode(this.data.title);
+        })
         this.getSalesInfo()
       }
     });
@@ -209,6 +270,12 @@ export default {
         margin-bottom: 5px;
         border-radius: 6px;
       }
+    }
+    .showEwm{
+      display: none;
+      position: absolute;
+      top:220px;
+      left: 215px;
     }
   }
   .btn-content{

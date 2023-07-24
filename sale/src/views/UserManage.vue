@@ -1,5 +1,15 @@
 <template>
   <div class="user-manage">
+    <json-excel
+      class="export-excel-wrapper"
+      :data="userData"
+      :fields="json_fields"
+      name="用户数据导出.xls"
+      >
+      <el-button type="button" class="daochubutton">
+        <span>导出</span>
+      </el-button>
+    </json-excel>
     <el-table
       ref="multipleTable"
       tooltip-effect="dark"
@@ -134,12 +144,39 @@ import {
   selectAllUserPage,
 } from "../api/user";
 import Pagination from "../components/Pagination.vue";
+import JsonExcel from 'vue-json-excel'
 export default {
   inject: ["reload"],
-  components: { Pagination },
+  components: { Pagination,JsonExcel },
   data() {
     return {
       userData: [],
+      json_fields: {
+        姓名: "userName",
+        昵称: "nickName",
+        角色: "role",
+        电话号码: "phone",
+        身份证号: "identityNum",
+        创建时间: "createTime",
+        用户类型: {
+        field: "role",
+          callback: (value) => {
+          let a;
+          switch (value) {
+          case 'user':
+          a = "普通用户";
+          break;
+          case 'admin':
+          a = "管理员";
+          break;
+          case 'expert':
+          a = "专家";
+          break;
+          }
+          return a;
+          },
+        },
+      },
       dialogVisible: false,
       dialogTableVisible: false,
       dialogFormVisible: false,
@@ -226,6 +263,20 @@ export default {
   background: #fff;
   margin: 10px auto;
   padding: 10px 20px;
+  .export-excel-wrapper{
+    margin-top: 5px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: row;
+    .daochubutton{
+      padding:7px,12px;
+      color: #fff;
+      border-color: #67C23A;
+      background-color: #67C23A;
+      border: 1px solid #DCDFE6;
+      border-radius: 4px;
+    }
+  }
   .manager-change-user-info {
     .el-dialog {
       width: 500px;

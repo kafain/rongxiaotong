@@ -334,3 +334,25 @@ export function addReserve(params) {
     })
 }
 
+//根据id查询评论
+export function selectComment(params) {
+    return request({
+        method: 'get',
+        url: `/order/selectComment/${params.orderId}`,
+        headers: {
+            'Authorization': window.localStorage.token,
+        },
+    })
+}
+
+// 增加评论
+export function addComment(params) {
+    return request({
+        method: 'post',
+        url: `/order/addComment/${params.orderId}/${params.content}`,
+        headers: {
+            'Authorization': window.localStorage.token,
+        },
+    })
+}
+

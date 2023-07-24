@@ -51,8 +51,14 @@
           <el-menu-item index="8-3" @click="userManage" v-if="$store.getters.isAdmin">用户管理</el-menu-item>
           <el-menu-item index="8-4" @click.native="goodsManage" v-if="$store.getters.isAdmin">商品管理</el-menu-item>
           <el-menu-item index="8-5" @click.native="handleAbout">关于我们</el-menu-item>
+<<<<<<< Updated upstream
           <el-menu-item index="8-6" @click.native="allChart">数据报表</el-menu-item>
           <el-menu-item index="8-7" @click.native="logout">退出</el-menu-item>
+=======
+          <el-menu-item index="8-6" @click.native="logout">退出</el-menu-item>
+          <el-menu-item index="8-7" @click.native="allChart">数据报表</el-menu-item>
+          <el-menu-item index="8-8" @click.native="feedbackManage" v-if="$store.getters.isAdmin">反馈信息</el-menu-item>
+>>>>>>> Stashed changes
         </el-submenu>
       </el-menu>
     </div>
@@ -136,6 +142,9 @@ export default {
     },
     allChart(){
       this.$router.push("/home/allChart").catch((err)=>err);
+    },
+    feedbackManage(){
+      this.$router.push("/home/feedbackManage").catch((err)=>err);
     }
   },
   created() {

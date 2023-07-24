@@ -43,8 +43,14 @@ import SmartMatch from '../views/SmartMatch'
 import FinancingDetails from '../views/FinancingDetails'
 import userGood from '../views/goodsManager.vue'
 import AboutUs from '../views/AboutUs'
+<<<<<<< Updated upstream
 
 import AllCharts from "@/components/AllCharts/AllCharts.vue";
+=======
+import goodsChart from "@/components/AllCharts/GoodsChart.vue";
+import Feedback from "../views/Feedback.vue"
+import FeedbackManage from "../views/FeedbackManage.vue"
+>>>>>>> Stashed changes
 
 Vue.use(VueRouter)
 
@@ -243,6 +249,10 @@ const routes = [
         path: 'usermanage',
         component: UserManage
       },
+      {
+        path:'feedbackManage',
+        component:FeedbackManage
+      }
     ]
   },
   {
@@ -256,6 +266,10 @@ const routes = [
   {
     path: '/register',
     component: Register
+  },
+  {
+    path:'/FeedbackPage',
+    component:Feedback
   }
 ]
 
