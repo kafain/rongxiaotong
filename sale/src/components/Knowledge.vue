@@ -1,6 +1,6 @@
 <template>
   <div class="knowledge-box">
-    <div class="knowledge" v-for="(item, index) in cknowledges" :key="index">
+    <div class="knowledge" v-for="(item, index) in cknowledges" :key="index"  @mousemove="handleMouseMove" @mouseleave="resetBoxSize">
       <video class="knowledge-img" width="200px" height="160px" v-if="item.type==='mp4'||item.type==='MP4'" accept="MP4,mp4" :src="$store.state.imgShowRoad + '/file/' + item.picPath" controls autoplay/>
       <img v-else class="knowledge-img" :src="$store.state.imgShowRoad + '/file/' + item.picPath" alt="" />
       
@@ -26,6 +26,12 @@ export default {
   methods:{
     handleDetail(item){
       this.$router.push(`/home/knowledge/${item.knowledgeId}`)
+    },
+    handleMouseMove(event) {
+      event.target.classList.add('is-hovered');
+    },
+    resetBoxSize(event) {
+      event.target.classList.remove('is-hovered');
     }
   }
 };
@@ -41,6 +47,7 @@ export default {
   justify-content: flex-start;
   flex-wrap: wrap;
   .knowledge {
+    transition: transform 0.3s;
     width: 500px;
     height: 200px;
     padding: 20px;
@@ -106,5 +113,10 @@ export default {
       }
     }
   }
+  .knowledge.is-hovered {
+  transform: scale(1.2);
+  box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.4);
+  }
+
 }
 </style>
