@@ -20,9 +20,62 @@
       <div class="item-style contact-us">全国服务热线：400-828-123456</div>
       <div class="item-style contact-us marginR50">QQ: 1234567890</div>
     </div>
+    <div class='map-box'>
+      <div class='container' id='container'></div>
+    </div>
   </div>
 </template>
+<script>
+import AMapLoader from '@amap/amap-jsapi-loader'
+export default {
+data() {
+return {
+map: null
+}
+},
+created() {
+this.initMap()
+},
+methods: {
+initMap() {
+// 高德地图key的密钥
+window._AMapSecurityConfig = {
+securityJsCode: '' // 密钥
+}
+AMapLoader.load({
+key: "93479051c3ebc91b0af8e57a1683c6f4", // 申请好的Web端开发者Key，首次调用 load 时必填
+version: "2.0", // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
+plugins: [], // 需要使用的的插件列表，如比例尺'AMap.Scale'等
+AMapUI: {
+// 是否加载 AMapUI，缺省不加载
+version: '1.1', // AMapUI 缺省 1.1
+plugins: [] // 需要加载的 AMapUI ui插件
+},
+Loca: {
+// 是否加载 Loca， 缺省不加载
+version: '2.0.0' // Loca 版本，缺省 1.3.2
+}
+}).then((AMap) => {
+console.log('-----')
+this.map = new AMap.Map('container', {
+viewMode: '2D', // 默认使用 2D 模式，如果希望使用带有俯仰角的 3D 模式，请设置 viewMode: '3D',
+zoom: 11, //初始化地图层级
+center: [104.18408, 30.8222],//初始化地图中心点
+});
+}).catch(e => {
+console.log(e);
+})
+}
+}
+}
+</script>
 
+<style>
+.container {
+  width: 100%;
+  height: 100vh;
+}
+</style>
 <style lang="less" scoped>
 .about-container{
   width: 1100px;
@@ -45,7 +98,7 @@
   .marginL25{
     margin-left: 25px;
   }
-   .marginL25{
+  .marginL25{
     margin-left: 25px;
   }
   .contact-us{
@@ -61,5 +114,9 @@
   .about-content{
     margin-top: 50px;
   }
+}
+.map-box{
+  width:1000px;
+  height:1000px;
 }
 </style>

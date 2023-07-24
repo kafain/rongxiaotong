@@ -47,14 +47,23 @@
         </button>
         <div class="otherlogin">
           <hr><p>其他方式登录</p>
-          <a @click="smsLogin">
-            <img alt="短信登录" src="/assets/img/note.png" >
+          <div>
+            <a @click="smsLogin">
+              <img alt="短信登录" src="/login/note.jpg" width="30px" >
+            <p>短信登录</p>
+          </a>
+          </div>
+          <br>
+          <a @click="QRLogin">
+            <img alt="二维码登录" src="/login/QR.jpg" width="30px">
+            <p>二维码登录</p>
           </a>
         </div>
-      </div>
-      <div class="message">
+        <div class="message">
         <p>没有账号? <router-link to="/register">立即注册</router-link></p>
+        </div>
       </div>
+      
     </div>
   </div>
   
@@ -190,6 +199,9 @@ export default {
     },
     smsLogin() {
       router.push('/smsLogin');
+    },
+    QRLogin() {
+      router.push('/QRLogin');
     }
   },
   created() {},
@@ -221,7 +233,7 @@ export default {
     }
     #login_form {
       padding: 20px;
-      margin-bottom: 15px;
+      margin-bottom: 0px;
       border: 1px solid #d8dee2;
       border-radius: 5px;
       background-color: #fff;
@@ -229,9 +241,8 @@ export default {
     .message {
       padding: 10px;
       padding-bottom: 0;
-      color: white;
+      color: rgb(12, 12, 12);
       border: 1px solid #d8dee2;
-      border-radius: 5px;
       text-align: center;
     }
     .checkbox {

@@ -23,8 +23,11 @@
             <button @click="scrollToTop" class="top-button">回顶部</button>
         </div>
     </div>
-    <router-view></router-view>
-    <Footer></Footer>
+    <div>
+      <router-view></router-view>
+      <Footer></Footer>
+    </div>
+    
   </div>
 </template>
 

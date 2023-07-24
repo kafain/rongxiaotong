@@ -47,12 +47,20 @@
           <div class="otherlogin">
             <hr><p>其他方式登录</p>
             <a @click="login">
-              <img alt="密码登录" src="/assets/img/note.png" >
+              <img alt="密码登录" src="/login/user.jpg" width="30px">
+              <p>密码登录</p>
+              
+            </a>
+            <br>
+            <a @click="QRLogin">
+              <img alt="二维码登录" src="/login/QR.jpg" width="30px">
+              <p>二维码登录</p>
+            
             </a>
           </div>
-        </div>
-        <div class="message">
-          <p>没有账号? <router-link to="/register">立即注册</router-link></p>
+          <div class="message">
+            <p>没有账号? <router-link to="/register">立即注册</router-link></p>
+          </div>
         </div>
       </div>
     </div>
@@ -219,6 +227,9 @@
       },
       login() {
         router.push('/login');
+      },
+      QRLogin() {
+      router.push('/QRLogin');
       }
     },
     created() {},
@@ -256,11 +267,10 @@
         background-color: #fff;
       }
       .message {
-        padding: 10px;
+        padding: 1px;
         padding-bottom: 0;
-        color: white;
+        color: rgb(12, 12, 12);
         border: 1px solid #d8dee2;
-        border-radius: 5px;
         text-align: center;
       }
       .checkbox {

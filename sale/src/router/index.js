@@ -52,7 +52,7 @@ import Feedback from "../views/Feedback.vue"
 import FeedbackManage from "../views/FeedbackManage.vue"
 import ForgetPassword from '../views/ForgetPassword.vue';
 import SmsLogin from '../views/SmsLogin.vue'
-
+import QRLogin from '../views/QRLogin.vue'
 Vue.use(VueRouter)
 
 
@@ -279,6 +279,10 @@ const routes = [
   {
     path: '/smsLogin',
     component: SmsLogin
+  },
+  {
+    path: '/QRLogin',
+    component: QRLogin
   }
 ]
 

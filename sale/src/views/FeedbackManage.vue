@@ -1,6 +1,7 @@
 <template>
   <div class="feedbackManage">
-    <table>
+    <div class="hh">
+      <table>
       <thead>
         <tr>
           <th>用户</th>
@@ -16,6 +17,8 @@
         </tr>
       </tbody>
     </table>
+    </div>
+    
   </div>
 </template>
 <script>
@@ -58,5 +61,8 @@ th, td {
   padding: 8px;
   text-align: left;
   border-bottom: 1px solid #ddd;
+}
+.hh{
+  margin-bottom: 250px;
 }
 </style>
